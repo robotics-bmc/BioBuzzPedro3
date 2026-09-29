@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.pedro;
 
+import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Scheduler;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import static com.pedropathing.api.Paths.*;
 
@@ -8,8 +11,11 @@ import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 
 @TeleOp(name="Basic: Linear OpMode", group="Linear OpMode")
-public class DriverLearn {
-
+public class DriverLearn extends OpMode {
+    private Follower follower;
+    public void init() {
+        follower = Constants.create(hardwareMap);
+    }
 
     public class Paths {
 
@@ -36,5 +42,16 @@ public class DriverLearn {
         public Path path4() {
             return line(point3, point4).reverseTangent();
         }
+    }
+    @Override
+    public void loop() {
+        follower.update();
+        Scheduler.execute();
+        // add your other methods needed in the loop here
+        telemetry.addData("X", follower.pose().x());
+        telemetry.addData("Y", follower.pose().y());
+        telemetry.addData("Heading", Math.toDegrees(follower.pose().heading()));
+        telemetry.addData("Follower Mode", follower.mode());
+        telemetry.update();
     }
 }
