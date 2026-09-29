@@ -10,7 +10,7 @@ import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 
-@TeleOp(name="Basic: Linear OpMode", group="Linear OpMode")
+@TeleOp(name="Pose Check", group="Checks")
 public class DriverLearn extends OpMode {
     private Follower follower;
     public void init() {
